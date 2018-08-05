@@ -1,24 +1,16 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI';
-import ListBooks from './ListBooks';
-import SearchBooks from './SearchBooks';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import ListBooks from './components/ListBooks';
+import SearchBooks from './components/SearchBooks';
 import './App.css';
 
-class BooksApp extends React.Component {
-  state = {
-    showSearchPage: false
-  }
-
-  changePage = status => this.setState({ showSearchPage: status });
+class BooksApp extends Component {
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks onChangePage={() => this.changePage(false)} />
-        ) : (
-          <ListBooks onChangePage={() => this.changePage(true)}/>
-        )}
+        <Route exact path='/' component={ListBooks}/>
+        <Route path='/search' component={SearchBooks}/>
       </div>
     )
   }
