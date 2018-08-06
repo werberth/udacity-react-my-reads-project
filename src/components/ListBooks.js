@@ -5,8 +5,18 @@ import BookShelf from './BookShelf'
 
 
 class ListBooks extends Component {
-    state = {
-        books: []
+    constructor(props){
+        super(props);
+
+        this.state = {
+            books: []
+        }
+
+        this.shelfs = [
+            { shelf: 'Currently Reading',id: 'currentlyReading' },
+            { shelf: 'Want to Read', id: 'wantToRead' },
+            { shelf: 'Read', id: 'read' }
+        ];
     }
 
     componentDidMount(){
@@ -17,7 +27,6 @@ class ListBooks extends Component {
     }
 
     render(){
-        const shelfs = ['Currently Reading', 'Want to Read', 'Read'];
  
         return (
             <div className="list-books">
@@ -25,8 +34,8 @@ class ListBooks extends Component {
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                    {shelfs.map((shelf) => (
-                        <BookShelf books={this.state.books} title={shelf}/>
+                    {this.shelfs.map((shelf) => (
+                        <BookShelf books={this.state.books} shelf={shelf}/>
                     ))}
                 </div>
                 <div className="open-search">
