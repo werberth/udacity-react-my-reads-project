@@ -5,7 +5,6 @@ class BookShelf extends Component {
 
     getShelfBooks = () => (
         this.props.books.filter((book) => {
-            console.log(book.shelf, this.props.shelf.id);
             return book.shelf === this.props.shelf.id;
         })
     );
@@ -15,11 +14,13 @@ class BookShelf extends Component {
 
         return (
             <div className="bookshelf">
-                <h2 className="bookshelf-title">{this.props.shelf.title}</h2>
+                <h2 className="bookshelf-title">{this.props.shelf.shelfTitle}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
                         {books.map((book) => (
-                            <li><BookItem book={book}/></li>    
+                            <li>
+                                <BookItem changeBookShelf={this.props.changeBookShelf} book={book}/>
+                            </li>    
                         ))}
                     </ol>
                 </div>

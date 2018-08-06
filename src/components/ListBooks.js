@@ -13,15 +13,30 @@ class ListBooks extends Component {
         }
 
         this.shelfs = [
-            { shelf: 'Currently Reading',id: 'currentlyReading' },
-            { shelf: 'Want to Read', id: 'wantToRead' },
-            { shelf: 'Read', id: 'read' }
+            { shelfTitle: 'Currently Reading',id: 'currentlyReading' },
+            { shelfTitle: 'Want to Read', id: 'wantToRead' },
+            { shelfTitle: 'Read', id: 'read' }
         ];
+    }
+
+    updateBookShelf = (book, e) => {
+        const shelf = e.target.value;
+        this.setState((state) => ({
+            books: state.books.map((_book) => {
+                if(book.id === _book.id){
+                    book.shelf = shelf;
+                    return book
+                }
+                return _book
+            })
+        }));
+        BookAPI.update(book, shelf)
     }
 
     componentDidMount(){
         BookAPI.getAll()
           .then((books) => {
+            console.log(books)
             this.setState({ books })
         })
     }
@@ -35,7 +50,11 @@ class ListBooks extends Component {
                 </div>
                 <div className="list-books-content">
                     {this.shelfs.map((shelf) => (
-                        <BookShelf books={this.state.books} shelf={shelf}/>
+                        <BookShelf 
+                            books={this.state.books}
+                            changeBookShelf={this.updateBookShelf}
+                            shelf={shelf}
+                        />
                     ))}
                 </div>
                 <div className="open-search">
