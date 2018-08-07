@@ -19,30 +19,32 @@ class ListBooks extends Component {
         ];
     }
 
+    getShelfBooks = (shelf) => (
+        this.state.books.filter((book) => (book.shelf === shelf))
+    );
+
     updateBookShelf = (book, e) => {
         const shelf = e.target.value;
-        this.setState((state) => ({
-            books: state.books.map((_book) => {
-                if(book.id === _book.id){
-                    book.shelf = shelf;
-                    return book
+        this.setState({
+            books: this.state.books.map((item) => {
+                if(book === item.id){
+                    item.shelf = shelf;
                 }
-                return _book
+                return item;
             })
-        }));
-        BookAPI.update(book, shelf)
+        });
+
+        BookAPI.update(book, shelf);
     }
 
     componentDidMount(){
         BookAPI.getAll()
-          .then((books) => {
-            console.log(books)
-            this.setState({ books })
+          .then((books) => {  
+            this.setState({books: books})
         })
     }
 
     render(){
- 
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -51,9 +53,10 @@ class ListBooks extends Component {
                 <div className="list-books-content">
                     {this.shelfs.map((shelf) => (
                         <BookShelf 
-                            books={this.state.books}
+                            key={shelf.id}
+                            books={this.getShelfBooks(shelf.id)}
                             changeBookShelf={this.updateBookShelf}
-                            shelf={shelf}
+                            shelfTitle={shelf.shelfTitle}
                         />
                     ))}
                 </div>

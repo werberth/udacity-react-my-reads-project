@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as BookAPI from '../utils/BooksAPI';
 
 
 class BookItem extends Component {
@@ -19,7 +18,7 @@ class BookItem extends Component {
                     backgroundImage: `url(${this.props.book.imageLinks.smallThumbnail})` 
                 }}></div>
                 <div className="book-shelf-changer">
-                    <select onChange={(e) => this.props.changeBookShelf(this.props.book, e)}>
+                    <select onChange={(e) => this.props.changeBookShelf(this.props.book.id, e)}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
