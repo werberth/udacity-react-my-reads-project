@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as BookAPI from '../utils/BooksAPI';
+import logo from '../icons/logo.png'
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf'
 
@@ -47,6 +48,7 @@ class ListBooks extends Component {
         return (
             <div className="list-books">
                 <div className="list-books-title">
+                    <img alt="My Reads Logo" src={logo}/>
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
