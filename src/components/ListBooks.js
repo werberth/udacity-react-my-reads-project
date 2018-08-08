@@ -10,7 +10,8 @@ class ListBooks extends Component {
         super(props);
 
         this.state = {
-            books: []
+            books: [],
+            loading: true
         }
 
         this.shelfs = [
@@ -39,9 +40,9 @@ class ListBooks extends Component {
 
     componentDidMount(){
         BookAPI.getAll()
-          .then((books) => {  
-            this.setState({books: books})
-        })
+          .then((books) => {
+                this.setState({books: books, loading: false})
+            })
     }
 
     render(){
@@ -53,11 +54,12 @@ class ListBooks extends Component {
                 </div>
                 <div className="list-books-content">
                     {this.shelfs.map((shelf) => (
-                        <BookShelf 
+                        <BookShelf
                             key={shelf.id}
                             books={this.getShelfBooks(shelf.id)}
                             changeBookShelf={this.updateBookShelf}
                             shelfTitle={shelf.shelfTitle}
+                            loading={this.state.loading}
                         />
                     ))}
                 </div>

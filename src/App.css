@@ -53,6 +53,11 @@ body, .app {
   text-align: center;
 }
 
+.shelf-loader {
+  width: 125px;
+  height: 125px;
+}
+
 .open-search {
   position: fixed;
   right: 25px;
