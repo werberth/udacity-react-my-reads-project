@@ -27,13 +27,12 @@ class ListBooks extends Component {
         const shelf = e.target.value;
         this.setState({
             books: this.state.books.map((item) => {
-                if(book === item.id){
+                if(book.id === item.id){
                     item.shelf = shelf;
                 }
                 return item;
             })
         });
-
         BookAPI.update(book, shelf);
     }
 
