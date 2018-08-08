@@ -58,6 +58,14 @@ body, .app {
   height: 125px;
 }
 
+.search-loader {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    width: 250px;
+}
+
 .open-search {
   position: fixed;
   right: 25px;
