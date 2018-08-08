@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as BookAPI from '../utils/BooksAPI';
+import logo from '../icons/logo.png'
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf'
 
@@ -9,7 +10,8 @@ class ListBooks extends Component {
         super(props);
 
         this.state = {
-            books: []
+            books: [],
+            loading: true
         }
 
         this.shelfs = [
@@ -38,24 +40,26 @@ class ListBooks extends Component {
 
     componentDidMount(){
         BookAPI.getAll()
-          .then((books) => {  
-            this.setState({books: books})
-        })
+          .then((books) => {
+                this.setState({books: books, loading: false})
+            })
     }
 
     render(){
         return (
             <div className="list-books">
                 <div className="list-books-title">
+                    <img alt="My Reads Logo" src={logo}/>
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
                     {this.shelfs.map((shelf) => (
-                        <BookShelf 
+                        <BookShelf
                             key={shelf.id}
                             books={this.getShelfBooks(shelf.id)}
                             changeBookShelf={this.updateBookShelf}
                             shelfTitle={shelf.shelfTitle}
+                            loading={this.state.loading}
                         />
                     ))}
                 </div>
