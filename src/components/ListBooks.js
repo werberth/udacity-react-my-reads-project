@@ -25,8 +25,7 @@ class ListBooks extends Component {
         this.state.books.filter((book) => (book.shelf === shelf))
     );
 
-    updateBookShelf = (book, e) => {
-        const shelf = e.target.value;
+    updateBookShelf = (book, shelf) => {
         this.setState({
             books: this.state.books.map((item) => {
                 if(book.id === item.id){
