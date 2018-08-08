@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import BookItem from './BookItem';
+import loader from '../icons/loader.gif'
 
 class BookShelf extends Component {
 
     render(){
 
-        const {books, shelfTitle, changeBookShelf} = this.props
-
+        const {books, shelfTitle, loading, changeBookShelf} = this.props
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{shelfTitle}</h2>
                 <div className="bookshelf-books">
+                    {loading && <img src={loader} className="shelf-loader" />}
                     <ol className="books-grid">
                         {books.map((book) => (
                             <li key={book.id}>
-                                <BookItem changeBookShelf={changeBookShelf} book={book}/>
+                                <BookItem
+                                    changeBookShelf={changeBookShelf}
+                                    book={book}
+                                />
                             </li>    
                         ))}
                     </ol>

@@ -12,14 +12,24 @@ body, .app {
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: #222879;
   text-align: center;
 }
+
 .list-books-title h1 {
-  font-weight: 400;
+  font-weight: 600;
+  font-size: 3em;
+  display: inline-block;
+  position: relative;
   margin: 0;
   color: white;
 }
+
+.list-books-title img {
+  display: inline-block;
+  margin-right: 1em;
+  vertical-align: -13px;
+} 
 
 .list-books-content {
   padding: 0 0 80px;
@@ -43,6 +53,19 @@ body, .app {
   text-align: center;
 }
 
+.shelf-loader {
+  width: 125px;
+  height: 125px;
+}
+
+.search-loader {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    width: 250px;
+}
+
 .open-search {
   position: fixed;
   right: 25px;
@@ -50,16 +73,16 @@ body, .app {
 }
 .open-search a {
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: #2e7d32;
-  background-image: url('./icons/add.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 28px;
+  background: #1758b1 url(./icons/search.svg) center/35px no-repeat;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
+}
+
+.open-search a:hover {
+  background: url(./icons/search_change.svg) center/35px no-repeat;
 }
 
 /* search page */
@@ -147,7 +170,7 @@ body, .app {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #2e64d2;
   background-image: url('./icons/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
