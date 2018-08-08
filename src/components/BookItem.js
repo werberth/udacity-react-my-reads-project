@@ -9,18 +9,21 @@ class BookItem extends Component {
     )
 
     render(){
+
+        const {book, changeBookShelf, shelf} = this.props
+
         return (
             <div className="book">
                 <div className="book-top">
                 <div className="book-cover" style={{ 
                     width: 128,
                     height: 193,
-                    backgroundImage: `url(${this.props.book.imageLinks.smallThumbnail})` 
+                    backgroundImage: `url(${book.imageLinks.smallThumbnail})`
                 }}></div>
                 <div className="book-shelf-changer">
                     <select
-                        value={this.props.book.shelf}
-                        onChange={(e) => this.props.changeBookShelf(this.props.book, e)}
+                        value={shelf}
+                        onChange={(e) => changeBookShelf(book, e)}
                     >
                         <option value="move" disabled="disabled">Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
@@ -29,9 +32,9 @@ class BookItem extends Component {
                     </select>
                 </div>
                 </div>
-                <div className="book-title">{this.props.book.title}</div>
+                <div className="book-title">{book.title}</div>
                 <div className="book-authors">
-                    {this.getBookAuthors(this.props.book)}
+                    {this.getBookAuthors(book)}
                 </div>
             </div>
         )
