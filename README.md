@@ -1,6 +1,6 @@
 ## Udacity Nanodegree - MyReads Project
 
-<img src="https://media.giphy.com/media/1AfrpjvfJXp7bdIaVT/giphy.gif">
+<img src="https://github.com/werberth/udacity-react-my-reads-project/blob/master/_assets/demo.gif">
 
 ### Instalation
 * Clone this repo.
