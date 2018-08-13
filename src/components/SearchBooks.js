@@ -9,6 +9,7 @@ class SearchBooks extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            emptyQuery: '',
             result: [],
             myBooks: [],
             loading: false
@@ -21,6 +22,7 @@ class SearchBooks extends Component {
             .then(response => {
                 BookAPI.getAll()
                     .then(books => {
+                        // update myBooks
                         this.setState({myBooks: books});
                         this.updateSearch();
                     });
@@ -36,20 +38,28 @@ class SearchBooks extends Component {
     }
 
     search = (query) => {
+        // reset result, loading and define emptyQuery as false
+        this.setState({result: [], loading: false, emptyQuery: false});
+
         if(query !== ''){
-            this.setState({loading: true})
+            // start loading
+            this.setState({loading: true});
             BookAPI.search(query)
                 .then((response) => {
-                    const books = response.error ? response.items : response;
-                    this.updateSearch(books);
+                    // define result as [] when emptyQuery is true
+                    if(response.error === "empty query"){
+                        this.setState({result: [], emptyQuery: true, loading: false})
+                    } else {
+                        this.updateSearch(response);
+                    }
                 })
-        } else {
-            this.setState({result: []})
         }
     }
 
     updateSearch = (books=this.state.result) => {
         let result = [];
+        // looping a fetch books and my shelf books
+        // to define your shelf or None
         for(let book of books){
             book.shelf = 'None'
             for(let myBook of this.state.myBooks){
@@ -59,10 +69,12 @@ class SearchBooks extends Component {
             }
             result.push(book)
         }
-        this.setState({loading: false, result: result})
+        // stop loading, add result on state and define emptyQuery as false
+        this.setState({loading: false, result: result, emptyQuery: false});
     }
 
     render(){
+
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -71,7 +83,7 @@ class SearchBooks extends Component {
                         <input
                             type="text"
                             placeholder="Search by title or author"
-                            onChange={(e) => this.search(e.target.value.trim())}
+                            onChange={e => this.search(e.target.value.trim())}
                         />
                     </div>
                 </div>
@@ -79,6 +91,10 @@ class SearchBooks extends Component {
 
                     {this.state.loading && (
                         <img src={loader} className="search-loader"/>
+                    )}
+
+                    {this.state.emptyQuery && (
+                        <h3>A pesquisa não retornou nenhum resultado.</h3>
                     )}
 
                     <ol className="books-grid">
