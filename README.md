@@ -1,6 +1,6 @@
 ## Udacity Nanodegree - MyReads Project
 
-<img src="https://media.giphy.com/media/QLguK2J9vMM60QWUHx/giphy.gif" style="border: solid black 1.3px;">
+<img src="https://media.giphy.com/media/1AfrpjvfJXp7bdIaVT/giphy.gif">
 
 ### Instalation
 * Clone this repo.
