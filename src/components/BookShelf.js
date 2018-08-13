@@ -15,7 +15,7 @@ class BookShelf extends Component {
                 <div className="bookshelf-books">
                     {loading && <img src={loader} className="shelf-loader" />}
 
-                    {empty && <h3>Essa prateleira está vazia.</h3>}
+                    {empty && <h3 class="empty-shelf">This shelf is empty</h3>}
 
                     <ol className="books-grid">
                         {books.map((book) => (

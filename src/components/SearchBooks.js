@@ -94,7 +94,7 @@ class SearchBooks extends Component {
                     )}
 
                     {this.state.emptyQuery && (
-                        <h3>A pesquisa não retornou nenhum resultado.</h3>
+                        <h3 id="empty-query">Your search returned no results</h3>
                     )}
 
                     <ol className="books-grid">

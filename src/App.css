@@ -37,7 +37,7 @@ body, .app {
 }
 
 .bookshelf {
-  padding: 0 10px 20px;
+  padding: 0 10px 10px;
 }
 
 @media (min-width: 600px) {
@@ -48,6 +48,7 @@ body, .app {
 
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
+  font-size: 25px;
 }
 .bookshelf-books {
   text-align: center;
@@ -126,6 +127,12 @@ body, .app {
   padding: 80px 10px 20px;
 }
 
+#empty-query {
+  font-size: 30px !important;
+  color: #0a0f4b !important;
+  text-align: center;
+}
+
 /* books grid */
 
 .books-grid {
@@ -182,6 +189,12 @@ body, .app {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.empty-shelf {
+  font-size: 25px !important;
+  margin-top: 1em;
+  color: #2252b3 !important;
 }
 
 /* book cover */
