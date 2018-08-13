@@ -11,7 +11,7 @@ class BookItem extends Component {
 
     render(){
 
-        const {book, changeBookShelf, shelf} = this.props;
+        const {book, changeBookShelf} = this.props;
         const cover = book.imageLinks ? book.imageLinks.smallThumbnail : thumbnail;
         const coverStyle = {
             width: 128,
@@ -32,6 +32,7 @@ class BookItem extends Component {
                         onChange={(e) => changeBookShelf(book, e.target.value)}
                     >
                         <option value="move" disabled="disabled">Move to...</option>
+                        {book.shelf === "None" && <option value="None">None</option>}
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>

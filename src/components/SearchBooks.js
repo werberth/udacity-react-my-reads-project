@@ -9,23 +9,57 @@ class SearchBooks extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            books: [],
+            result: [],
+            myBooks: [],
             loading: false
         }
     }
 
-    changeBookShelf = (book, shelf) => (BookAPI.update(book, shelf));
+    changeBookShelf = (book, shelf) => {
+        if(shelf !== 'None'){
+            BookAPI.update(book, shelf)
+            .then(response => {
+                BookAPI.getAll()
+                    .then(books => {
+                        this.setState({myBooks: books});
+                        this.updateSearch();
+                    });
+            })
+        }
+    }
+
+    componentDidMount(){
+        BookAPI.getAll()
+        .then((books) => {
+            this.setState({myBooks: books})
+        })
+    }
 
     search = (query) => {
-        this.setState({books: []})
         if(query !== ''){
             this.setState({loading: true})
             BookAPI.search(query)
                 .then((response) => {
-                    const books = response.error ? response.items : response
-                    this.setState({loading: false, books: books})
+                    const books = response.error ? response.items : response;
+                    this.updateSearch(books);
                 })
+        } else {
+            this.setState({result: []})
         }
+    }
+
+    updateSearch = (books=this.state.result) => {
+        let result = [];
+        for(let book of books){
+            book.shelf = 'None'
+            for(let myBook of this.state.myBooks){
+                if(myBook.id === book.id){
+                    book.shelf = myBook.shelf;
+                }
+            }
+            result.push(book)
+        }
+        this.setState({loading: false, result: result})
     }
 
     render(){
@@ -48,7 +82,7 @@ class SearchBooks extends Component {
                     )}
 
                     <ol className="books-grid">
-                        {this.state.books.map((book) => (
+                        {this.state.result.map((book) => (
                             <li key={book.id}>
                                 <BookItem
                                     changeBookShelf={this.changeBookShelf}
