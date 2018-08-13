@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {debounce} from 'lodash';
 import * as BookAPI from '../utils/BooksAPI';
 import BookItem from './BookItem';
 import loader from '../icons/loader.gif'
@@ -14,6 +15,7 @@ class SearchBooks extends Component {
             myBooks: [],
             loading: false
         }
+        this.search = debounce(this.search, 500);
     }
 
     changeBookShelf = (book, shelf) => {
