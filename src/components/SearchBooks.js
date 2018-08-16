@@ -63,13 +63,17 @@ class SearchBooks extends Component {
         // looping a fetch books and my shelf books
         // to define your shelf or None
         for(let book of books){
-            book.shelf = 'None'
+            const shelf = 'None'
             for(let myBook of this.state.myBooks){
                 if(myBook.id === book.id){
-                    book.shelf = myBook.shelf;
+                    shelf = myBook.shelf;
                 }
             }
-            result.push(book)
+            const updatedBook = {
+                ...book,
+                shelf
+            }
+            result.push(updatedBook)
         }
         // stop loading, add result on state and define emptyQuery as false
         this.setState({loading: false, result: result, emptyQuery: false});
@@ -92,7 +96,7 @@ class SearchBooks extends Component {
                 <div className="search-books-results">
 
                     {this.state.loading && (
-                        <img src={loader} className="search-loader"/>
+                        <img src={loader} alt="loading..." className="search-loader"/>
                     )}
 
                     {this.state.emptyQuery && (
