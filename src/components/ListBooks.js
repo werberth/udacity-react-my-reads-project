@@ -29,7 +29,10 @@ class ListBooks extends Component {
         this.setState({
             books: this.state.books.map((item) => {
                 if(book.id === item.id){
-                    item.shelf = shelf;
+                    return {
+                        ...item,
+                        shelf
+                    };
                 }
                 return item;
             })
