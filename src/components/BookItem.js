@@ -32,7 +32,7 @@ class BookItem extends Component {
                         onChange={(e) => changeBookShelf(book, e.target.value)}
                     >
                         <option value="move" disabled="disabled">Move to...</option>
-                        {book.shelf === "None" && <option value="None">None</option>}
+                        <option value="None">None</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>
