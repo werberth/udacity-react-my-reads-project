@@ -63,7 +63,7 @@ class SearchBooks extends Component {
         // looping a fetch books and my shelf books
         // to define your shelf or None
         for(let book of books){
-            const shelf = 'None'
+            let shelf = 'None'
             for(let myBook of this.state.myBooks){
                 if(myBook.id === book.id){
                     shelf = myBook.shelf;
